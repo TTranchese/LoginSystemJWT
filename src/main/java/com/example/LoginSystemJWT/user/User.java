@@ -2,16 +2,17 @@ package com.example.LoginSystemJWT.user;
 
 import jakarta.persistence.*;
 import lombok.Builder;
+import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.List;
-
 @Builder
+@Data
 @Entity
-@Table (name ="_user")
+@Table (name = "user")
 public class User implements UserDetails {
 	@Id
 	@GeneratedValue
