@@ -1,8 +1,10 @@
 package com.example.LoginSystemJWT.user;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -13,6 +15,8 @@ import java.util.List;
 @Data
 @Entity
 @Table (name = "user")
+@NoArgsConstructor
+@AllArgsConstructor
 public class User implements UserDetails {
 	@Id
 	@GeneratedValue
@@ -31,10 +35,7 @@ public class User implements UserDetails {
 		this.email = email;
 		this.password = password;
 	}
-	
-	public User() {
-	}
-	
+
 	public Long getId() {
 		return id;
 	}
