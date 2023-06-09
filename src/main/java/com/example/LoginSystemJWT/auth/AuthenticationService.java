@@ -4,31 +4,34 @@ import com.example.LoginSystemJWT.config.JwtService;
 import com.example.LoginSystemJWT.user.Role;
 import com.example.LoginSystemJWT.user.User;
 import com.example.LoginSystemJWT.user.UserRepository;
-import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
-@RequiredArgsConstructor
 public class AuthenticationService {
-	private final UserRepository userRepository;
-	private final PasswordEncoder encoder;
-	private final JwtService jwtService;
-	private final AuthenticationManager authenticationManager;
+	@Autowired
+	private UserRepository userRepository;
+	@Autowired
+	private PasswordEncoder encoder;
+	@Autowired
+	private JwtService jwtService;
+	@Autowired
+	private AuthenticationManager authenticationManager;
 	
 	public AuthenticationResponse register(RegisterRequest request) {
-		var user = User.builder()
-				.firstName(request.getFirstName())
-				.lastName(request.getLastName())
-				.email(request.getEmail())
-				.password(encoder.encode(request.getPassword()))
-				.role(Role.USER)
+		var user = new User.builder()
+				.setFirstName(request.getFirstName())
+				.setLastName(request.getLastName())
+				.setEmail(request.getEmail())
+				.setPassword(encoder.encode(request.getPassword()))
+				.setRole(Role.USER)
 				.build();
 		var jwtToken = jwtService.generateToken(user);
-		return AuthenticationResponse.builder()
-				.token(jwtToken)
+		return new AuthenticationResponse.builder()
+				.setToken(jwtToken)
 				.build();
 	}
 	
@@ -42,8 +45,8 @@ public class AuthenticationService {
 		var user = userRepository.findByEmail(request.getEmail())
 				.orElseThrow();
 		var jwtToken = jwtService.generateToken(user);
-		return AuthenticationResponse.builder()
-				.token(jwtToken)
+		return new AuthenticationResponse.builder()
+				.setToken(jwtToken)
 				.build();
 	}
 }

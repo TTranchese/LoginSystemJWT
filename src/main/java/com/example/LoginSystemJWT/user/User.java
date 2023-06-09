@@ -6,10 +6,6 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -17,12 +13,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 import java.util.List;
 
-@Builder
-@Data
+
 @Entity
 @Table(name = "user")
-@NoArgsConstructor
-@AllArgsConstructor
 public class User implements UserDetails {
 	@Id
 	@GeneratedValue
@@ -34,12 +27,24 @@ public class User implements UserDetails {
 	@Enumerated(EnumType.STRING)
 	private Role role;
 	
-	public User(Long id, String firstName, String lastName, String email, String password) {
+	public User(Long id, String firstName, String lastName, String email, String password, Role role) {
 		this.id = id;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
 		this.password = password;
+		this.role = role;
+	}
+	
+	public User() {
+	}
+	
+	public User(builder builder) {
+		this.firstName = builder.firstName;
+		this.lastName = builder.lastName;
+		this.email = builder.email;
+		this.password = builder.password;
+		this.role = builder.role;
 	}
 	
 	public Long getId() {
@@ -112,4 +117,40 @@ public class User implements UserDetails {
 		return true;
 	}
 	
+	public static class builder {
+		private String firstName;
+		private String lastName;
+		private String email;
+		private String password;
+		private Role role;
+		
+		public builder setFirstName(String firstName) {
+			this.firstName = firstName;
+			return this;
+		}
+		
+		public builder setLastName(String lastName) {
+			this.lastName = lastName;
+			return this;
+		}
+		
+		public builder setEmail(String email) {
+			this.email = email;
+			return this;
+		}
+		
+		public builder setPassword(String password) {
+			this.password = password;
+			return this;
+		}
+		
+		public builder setRole(Role role) {
+			this.role = role;
+			return this;
+		}
+		
+		public User build() {
+			return new User(this);
+		}
+	}
 }
