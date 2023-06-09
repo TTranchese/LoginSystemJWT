@@ -10,7 +10,7 @@ public class AuthenticationResponse {
 	public AuthenticationResponse() {
 	}
 	
-	public AuthenticationResponse(builder builder) {
+	public AuthenticationResponse(Builder builder) {
 		this.token = builder.token;
 	}
 	
@@ -22,10 +22,10 @@ public class AuthenticationResponse {
 		this.token = token;
 	}
 	
-	public static class builder {
+	public static class Builder {
 		private String token;
 		
-		public builder setToken(String token) {
+		public Builder setToken(String token) {
 			this.token = token;
 			return this;
 		}

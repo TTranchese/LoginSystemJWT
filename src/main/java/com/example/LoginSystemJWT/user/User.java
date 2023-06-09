@@ -39,7 +39,7 @@ public class User implements UserDetails {
 	public User() {
 	}
 	
-	public User(builder builder) {
+	public User(Builder builder) {
 		this.firstName = builder.firstName;
 		this.lastName = builder.lastName;
 		this.email = builder.email;
@@ -117,34 +117,34 @@ public class User implements UserDetails {
 		return true;
 	}
 	
-	public static class builder {
+	public static class Builder {
 		private String firstName;
 		private String lastName;
 		private String email;
 		private String password;
 		private Role role;
 		
-		public builder setFirstName(String firstName) {
+		public Builder setFirstName(String firstName) {
 			this.firstName = firstName;
 			return this;
 		}
 		
-		public builder setLastName(String lastName) {
+		public Builder setLastName(String lastName) {
 			this.lastName = lastName;
 			return this;
 		}
 		
-		public builder setEmail(String email) {
+		public Builder setEmail(String email) {
 			this.email = email;
 			return this;
 		}
 		
-		public builder setPassword(String password) {
+		public Builder setPassword(String password) {
 			this.password = password;
 			return this;
 		}
 		
-		public builder setRole(Role role) {
+		public Builder setRole(Role role) {
 			this.role = role;
 			return this;
 		}
