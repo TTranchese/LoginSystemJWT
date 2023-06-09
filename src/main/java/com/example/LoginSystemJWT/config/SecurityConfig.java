@@ -1,6 +1,5 @@
 package com.example.LoginSystemJWT.config;
 
-import jakarta.servlet.Filter;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import org.springframework.context.annotation.Bean;
@@ -21,7 +20,7 @@ public class SecurityConfig {
 	
 	@SneakyThrows
 	@Bean
-	public SecurityFilterChain securityFilterChain(HttpSecurity http){
+	public SecurityFilterChain securityFilterChain(HttpSecurity http) {
 		
 		http
 				.csrf()
@@ -37,7 +36,7 @@ public class SecurityConfig {
 				.and()
 				.authenticationProvider(authenticationProvider)
 				.addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
-				
+		
 		return http.build();
 	}
 }
